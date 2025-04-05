@@ -9,9 +9,15 @@ class ApiService {
   // - Use 'http://10.0.2.2:8080/api' for Android emulator
   // - Use 'http://localhost:8080/api' for iOS simulator or desktop app
   // - Use actual IP address when testing on physical devices
-  static const String baseUrl = 'http://localhost:8080/api';
+  // For ngrok, use the full URL without port number
+  static const String baseUrl = 'https://model-bunny-just.ngrok-free.app/api';
   
   static const storage = FlutterSecureStorage();
+  
+  // Helper method to get a standard HTTP client
+  static http.Client _getClient() {
+    return http.Client();
+  }
   
   // Auth endpoints
   static Future<Map<String, dynamic>> register(String username, String password) async {
@@ -21,7 +27,8 @@ class ApiService {
       print('API URL: ${Uri.parse('$baseUrl/auth/signup')}');
       print('Request body: {"username": "$username", "password": "***"}');
       
-      final response = await http.post(
+      final client = _getClient();
+      final response = await client.post(
         Uri.parse('$baseUrl/auth/signup'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
@@ -29,6 +36,7 @@ class ApiService {
           'password': password,
         }),
       );
+      client.close();
       
       print('\n===== REGISTRATION RESPONSE =====');
       print('Status code: ${response.statusCode}');
@@ -64,7 +72,8 @@ class ApiService {
       print('API URL: ${Uri.parse('$baseUrl/auth/signin')}');
       print('Request body: {"username": "$username", "password": "***"}');
       
-      final response = await http.post(
+      final client = _getClient();
+      final response = await client.post(
         Uri.parse('$baseUrl/auth/signin'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
@@ -72,6 +81,7 @@ class ApiService {
           'password': password,
         }),
       );
+      client.close();
       
       print('\n===== LOGIN RESPONSE =====');
       print('Status code: ${response.statusCode}');
@@ -154,10 +164,12 @@ class ApiService {
       print('Request URL: ${Uri.parse(requestUrl)}');
       print('Request headers: $headers');
       
-      final response = await http.get(
+      final client = _getClient();
+      final response = await client.get(
         Uri.parse(requestUrl),
         headers: headers,
       );
+      client.close();
       
       print('Response status code: ${response.statusCode}');
       print('Response headers: ${response.headers}');
@@ -184,10 +196,12 @@ class ApiService {
       print('Request URL: ${Uri.parse(requestUrl)}');
       print('Request headers: $headers');
       
-      final response = await http.get(
+      final client = _getClient();
+      final response = await client.get(
         Uri.parse(requestUrl),
         headers: headers,
       );
+      client.close();
       
       print('Response status code: ${response.statusCode}');
       print('Response headers: ${response.headers}');
@@ -217,10 +231,12 @@ class ApiService {
       print('Request URL: ${Uri.parse(requestUrl)}');
       print('Request headers: $headers');
       
-      final response = await http.post(
+      final client = _getClient();
+      final response = await client.post(
         Uri.parse(requestUrl),
         headers: headers,
       );
+      client.close();
       
       print('Response status code: ${response.statusCode}');
       print('Response headers: ${response.headers}');
@@ -247,10 +263,12 @@ class ApiService {
       print('Request URL: ${Uri.parse(requestUrl)}');
       print('Request headers: $headers');
       
-      final response = await http.put(
+      final client = _getClient();
+      final response = await client.put(
         Uri.parse(requestUrl),
         headers: headers,
       );
+      client.close();
       
       print('Response status code: ${response.statusCode}');
       print('Response headers: ${response.headers}');
@@ -277,10 +295,12 @@ class ApiService {
       print('Request URL: ${Uri.parse(requestUrl)}');
       print('Request headers: $headers');
       
-      final response = await http.put(
+      final client = _getClient();
+      final response = await client.put(
         Uri.parse(requestUrl),
         headers: headers,
       );
+      client.close();
       
       print('Response status code: ${response.statusCode}');
       print('Response headers: ${response.headers}');
@@ -308,10 +328,12 @@ class ApiService {
       print('Request URL: ${Uri.parse(requestUrl)}');
       print('Request headers: $headers');
       
-      final response = await http.get(
+      final client = _getClient();
+      final response = await client.get(
         Uri.parse(requestUrl),
         headers: headers,
       );
+      client.close();
       
       print('Response status code: ${response.statusCode}');
       print('Response headers: ${response.headers}');
@@ -339,13 +361,15 @@ class ApiService {
       print('Request headers: $headers');
       print('Request body: ${jsonEncode({'content': content})}');
       
-      final response = await http.post(
+      final client = _getClient();
+      final response = await client.post(
         Uri.parse(requestUrl),
         headers: headers,
         body: jsonEncode({
           'content': content,
         }),
       );
+      client.close();
       
       print('Response status code: ${response.statusCode}');
       print('Response headers: ${response.headers}');
@@ -372,10 +396,12 @@ class ApiService {
       print('Request URL: ${Uri.parse(requestUrl)}');
       print('Request headers: $headers');
       
-      final response = await http.get(
+      final client = _getClient();
+      final response = await client.get(
         Uri.parse(requestUrl),
         headers: headers,
       );
+      client.close();
       
       print('Response status code: ${response.statusCode}');
       print('Response headers: ${response.headers}');
