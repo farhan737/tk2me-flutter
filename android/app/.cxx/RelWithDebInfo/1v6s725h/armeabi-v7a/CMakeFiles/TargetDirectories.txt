@@ -1,0 +1,2 @@
+C:/Users/Farhan Mohammad/Documents/tk2me-main/tk2me-flutter/android/app/.cxx/RelWithDebInfo/1v6s725h/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/Farhan Mohammad/Documents/tk2me-main/tk2me-flutter/android/app/.cxx/RelWithDebInfo/1v6s725h/armeabi-v7a/CMakeFiles/rebuild_cache.dir
